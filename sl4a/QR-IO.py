@@ -4,10 +4,16 @@ try:
     import androidhelper as android
 except ImportError:
     import android
-
-import json
-import requests
+import os
+import os.path
 import sys
+import json
+try:
+    import requests
+except ImportError:
+    os.system('{} {}/bin/{}'.format(
+        sys.executable, sys.prefix, 'pip install requests'))
+    import requests
 
 droid = android.Android()
 
