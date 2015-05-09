@@ -60,8 +60,9 @@ class UploadHandler(PatternMatchingEventHandler):
 
 def start_watch(ftp, watch):
     setup_logging()
-    watched_files = ["QR-IO.py"]
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sl4a')
+    watched_files = ["QR-IO.py", "requirements.txt"]
+    path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), '..', 'sl4a')
     ftp.sync_files([os.path.join(path, f) for f in watched_files])
 
     if not watch:
@@ -85,23 +86,29 @@ def setup_logging():
                     datefmt='%H:%M:%S')
 
 
-def parse_args():
-    parser = argparse.ArgumentParser(description='Sync files with device')
-    parser.add_argument('-u', help='ftp username',
+def main(args):
+    ftp = FtpSyncer(username=args.username, password=args.password,
+                    host=args.server, port=args.port)
+    start_watch(ftp, args.watch)
+
+
+def setup_argparse(parser):
+    parser.set_defaults(func=main)
+    parser.add_argument('-u', '--username', help='ftp username',
                         default='qpy3')
-    parser.add_argument('-p', help='ftp password',
+    parser.add_argument('-p', '--password', help='ftp password',
                         default='qpy3')
-    parser.add_argument('-s', help='ftp server',
+    parser.add_argument('-s', '--server', help='ftp server',
                         default='localhost')
-    parser.add_argument('-o', help='ftp port',
+    parser.add_argument('-o', '--port', help='ftp port',
                         default=2121)
-    parser.add_argument('-w', action='store_true', help='watch',
+    parser.add_argument('-w', '--watch', action='store_true', help='watch',
                         default=False)
-    return parser.parse_args()
+    return parser
 
 if __name__ == "__main__":
-    args = parse_args()
-    ftp = FtpSyncer(username=args.u, password=args.p,
-                    host=args.s, port=args.o)
-    start_watch(ftp, args.w)
+    root_parser = argparse.ArgumentParser(description='Sync files with device')
+    args = setup_argparse(root_parser).parse_args()
+    main(args)
+
 

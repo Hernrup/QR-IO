@@ -27,7 +27,7 @@ def make_request(endpoint, data):
             data=json.dumps(data),
             headers={'content-type': 'application/json'}
         )
-        droid.makeToast('{}: {}'.format(r.status, data))
+        # droid.makeToast('{}: {}'.format(r.status, data))
     except Exception as e:
         show_dialog('ERROR', str(e))
 
@@ -93,7 +93,7 @@ def main():
             if responce:
                 break
         droid.makeToast(data)
-        make_request(endpoint, data)
+        make_request(endpoint, {'data': data})
 
 
 sys.exit(main())
