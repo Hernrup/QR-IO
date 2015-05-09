@@ -60,7 +60,7 @@ class UploadHandler(PatternMatchingEventHandler):
 
 def start_watch(ftp, watch):
     setup_logging()
-    watched_files = ["QR-IO.py", "requirements.txt"]
+    watched_files = ["QR-IO.py"]
     path = os.path.join(
         os.path.dirname(os.path.abspath(__file__)), '..', 'sl4a')
     ftp.sync_files([os.path.join(path, f) for f in watched_files])
