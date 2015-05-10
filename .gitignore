@@ -2,3 +2,5 @@
 __pycache__
 venv
 *egg*
+dist
+/*.egg-info
