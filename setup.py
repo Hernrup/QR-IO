@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='QR-IO',
-      version='0.1',
+      version='0.2',
       description='A utility for using android as stdin device for barcode',
       url='https://github.com/Hernrup/QR-IO',
       author='Mikael Hernrup',
