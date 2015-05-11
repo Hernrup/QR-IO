@@ -7,7 +7,7 @@ setup(name='QR-IO',
       author='Mikael Hernrup',
       author_email='mikael@hernrup.se',
       license='MIT',
-      packages=['qrio_utils', 'qrio_web'],
+      packages=['qr_io', 'qr_io.utils', 'qr_io.web'],
       install_requires=[
           'CherryPy==3.7.0',
           'Flask==0.10.1',

@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 import sys
-from qrio_web import app
+from qr_io.web import app
 import logging as log
 import argparse
-from qrio_utils import upload, qr
+from qr_io.utils import upload, qr
 from cherrypy import wsgiserver
 
 
 def run_client(args):
     app.external_uri = args.external_uri
-    from qrio_web import views
+    from qr_io.web import views
     if args.debug:
         app.run(debug=args.debug, port=args.port, host='0.0.0.0')
 

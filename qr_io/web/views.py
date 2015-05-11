@@ -1,6 +1,6 @@
 from . import app
 from flask import make_response, request, jsonify
-from qrio_utils import qr, io as input_util
+from qr_io.utils import qr, io as input_util
 import logging as log
 from os import path
 
