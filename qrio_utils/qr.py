@@ -5,16 +5,16 @@ import math
 
 
 def generate_qr_image(data, file=None, error='Q', image_format='svg',
-                      custom_inlay=None, inlay_size=0.4):
+                      scale=4, custom_inlay=None, inlay_size=0.4):
     code = pyqrcode.create(data, error=error)
     stream = io.BytesIO()
 
     if image_format == 'svg':
-        code.svg(file=stream, scale=3)
+        code.svg(file=stream, scale=scale)
         if custom_inlay:
             raise ValueError('inlay is not allowed for image_format="svg"')
     elif image_format == 'png':
-        code.png(file=stream, scale=3)
+        code.png(file=stream, scale=scale)
         if custom_inlay:
             _add_custom_inlay(stream, custom_inlay, inlay_size)
     else:
@@ -48,4 +48,5 @@ def _add_custom_inlay(stream, file, inlay_size):
     offset = (math.floor((bg_w - img_w) / 2), math.floor((bg_h - img_h) / 2))
 
     background.paste(foreground, offset, foreground)
-    background.save('test3.png', 'png')
+    stream.seek(0)
+    background.save(stream, 'png')
