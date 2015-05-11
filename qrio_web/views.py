@@ -8,7 +8,7 @@ from os import path
 def show_qr_code_from_data():
     data = request.args['data']
     log.debug('QR code requested for: {}'.format(data))
-    image = qr.generate_qr_image_to_memory(data)
+    image = qr.generate_qr_image(data)
     response = make_response(image)
     response.headers['Content-Type'] = 'image/svg+xml'
     return response
@@ -29,7 +29,7 @@ def show_system_qrcode():
     base_url = app.external_uri if app.external_uri else request.host_url
     data = '{}/v1/input/'.format(base_url)
     log.debug('Connect QR code requested for: {}'.format(data))
-    image = qr.generate_qr_image_to_memory(data)
+    image = qr.generate_qr_image(data)
     response = make_response(image)
     response.headers['Content-Type'] = 'image/svg+xml'
     return response
@@ -41,7 +41,7 @@ def show_sl4a_qrcode():
         data = f.readlines()
     base_url = app.external_uri if app.external_uri else request.host_url
     log.debug('sl4a QR code requested')
-    image = qr.generate_qr_image_to_memory(data, error='L')
+    image = qr.generate_qr_image(data, error='L')
     response = make_response(image)
     response.headers['Content-Type'] = 'image/svg+xml'
     return response
