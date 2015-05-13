@@ -1,5 +1,5 @@
 from flask import Flask, url_for
-
+from . import config
 
 class Application(Flask):
 
@@ -7,7 +7,7 @@ class Application(Flask):
         super(Application, self).__init__(__name__)
         self._external_uri = None
 
-        self.config.from_object('config')
+        self.config.from_object(config)
 
     @property
     def external_uri(self):
