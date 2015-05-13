@@ -26,8 +26,9 @@ def input_request():
 
 @app.route('/v1/connect/')
 def show_system_qrcode():
-    base_url = app.external_uri if app.external_uri else request.host_url
-    data = '{}/v1/input/'.format(base_url)
+    base_url = 'http://'+app.external_uri+'/' if app.external_uri \
+        else request.host_url
+    data = '{}v1/input/'.format(base_url)
     log.debug('Connect QR code requested for: {}'.format(data))
     image = qr.generate_qr_image(data)
     response = make_response(image)

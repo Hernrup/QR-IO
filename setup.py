@@ -16,7 +16,8 @@ setup(name='QR-IO',
           'pyreadline==2.0',
           'qrcode==5.1',
           'watchdog==0.8.3',
-          'Pillow==2.8.1'
+          'Pillow==2.8.1',
+          'PyAutoGUI==0.9.30'
           ],
       tests_require=['nose'],
       scripts=['bin/qr-io.py'],
