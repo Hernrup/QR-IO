@@ -10,7 +10,7 @@ setup(name='QR-IO',
       packages=['qr_io', 'qr_io.utils', 'qr_io.web'],
       install_requires=[
           'CherryPy==3.7.0',
-          'Flask==0.10.1',
+          'Flask==1.0',
           'pypng==0.0.17',
           'PyQRCode==1.1',
           'pyreadline==2.0',
